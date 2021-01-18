@@ -7,6 +7,7 @@ fn main() {
     println("1 : 引き算")
     println("2 : 掛け算")
     println("3 : 割り算")
+	println("4 : べき乗")
     println("9 : プログラムを終了")
 
     for {
@@ -15,35 +16,39 @@ fn main() {
             exit(0)
         }
 
-        if 0 <= option && option <= 3 {
+        if 0 <= option && option <= 4 {
             break
         }
         println("正しいオプションを入力してください。")
     }
 
     a := os.input("A : ").f64()
-    b := os.input("B : ").f64()
+    b := os.input("B : ")
 
     match option {
         0 {
-            ans := add(a, b)
+            ans := add(a, b.f64())
             println("$a + $b = $ans")
         }
         1 {
-            ans := subtract(a, b)
+            ans := subtract(a, b.f64())
             println("$a - $b = $ans")
         }
         2 {
-            ans := multiply(a, b)
+            ans := multiply(a, b.f64())
             println("$a * $b = $ans")
         }
         3 {
-            ans, zero_div := divide(a, b)
+            ans, zero_div := divide(a, b.f64())
             if zero_div {
                 println("$a / $b = undefined")
             } else {
                 println("$a / $b = $ans")
             }
+        }
+        4 {
+            ans := pow(a, b.int())
+            println("$a ^ $b = $ans")
         }
         else {
 
@@ -69,4 +74,12 @@ fn divide(a f64, b f64) (f64, bool) {
     }
 
     return a / b, false
+}
+
+fn pow(a f64, b int) f64 {
+    if b > 0 {
+        return a * pow(a, b - 1)
+    } else {
+        return 1
+    }
 }
