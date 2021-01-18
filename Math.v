@@ -1,4 +1,5 @@
 import os
+import math
 
 fn main() {
     mut option := -1
@@ -8,6 +9,7 @@ fn main() {
     println("2 : 掛け算")
     println("3 : 割り算")
 	println("4 : べき乗")
+    println("5 : 度=>ラジアン")
     println("9 : プログラムを終了")
 
     for {
@@ -16,14 +18,17 @@ fn main() {
             exit(0)
         }
 
-        if 0 <= option && option <= 4 {
+        if 0 <= option && option <= 5 {
             break
         }
         println("正しいオプションを入力してください。")
     }
 
     a := os.input("A : ").f64()
-    b := os.input("B : ")
+    mut b := "This variable may not be used."
+    if 0 <= option && option <= 4 {
+        b = os.input("B : ")
+    }
 
     match option {
         0 {
@@ -49,6 +54,10 @@ fn main() {
         4 {
             ans := pow(a, b.int())
             println("$a ^ $b = $ans")
+        }
+        5 {
+            ans := radians(a)
+            println("$a° = $ans [rad]")
         }
         else {
 
@@ -82,4 +91,8 @@ fn pow(a f64, b int) f64 {
     } else {
         return 1
     }
+}
+
+fn radians(deg f64) f64 {
+    return deg * (math.pi / 180)
 }
