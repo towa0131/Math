@@ -8,7 +8,7 @@ fn main() {
     println("1 : 引き算")
     println("2 : 掛け算")
     println("3 : 割り算")
-	println("4 : べき乗")
+    println("4 : べき乗")
     println("5 : 度=>ラジアン")
     println("9 : プログラムを終了")
 
@@ -26,6 +26,7 @@ fn main() {
 
     a := os.input("A : ").f64()
     mut b := "This variable may not be used."
+
     if 0 <= option && option <= 4 {
         b = os.input("B : ")
     }
